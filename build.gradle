@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+group 'io.github.epeee'
+version '0.0.1'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+def junitJupiter = '5.2.0'
+
+dependencies {
+    implementation "org.junit.jupiter:junit-jupiter-api:${junitJupiter}"
+    implementation 'org.junit.platform:junit-platform-launcher:1.2.0'
+    implementation "org.junit.jupiter:junit-jupiter-engine:${junitJupiter}"
+
+    testCompile 'org.assertj:assertj-core:3.10.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+wrapper {
+    gradleVersion = "4.8.1"
+    distributionSha256Sum = "af334d994b5e69e439ab55b5d2b7d086da5ea6763d78054f49f147b06370ed71"
+}
