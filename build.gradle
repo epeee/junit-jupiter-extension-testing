@@ -21,6 +21,8 @@ dependencies {
     testCompile 'org.assertj:assertj-core:3.10.0'
 }
 
+apply from: "$rootDir/gradle/codeQuality.gradle"
+
 test {
     useJUnitPlatform {
         excludeTags 'sample'
