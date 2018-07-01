@@ -22,7 +22,9 @@ dependencies {
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        excludeTags 'sample'
+    }
 }
 
 wrapper {
