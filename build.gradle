@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id "com.gradle.build-scan" version "1.14"
 }
 
 group 'io.github.epeee'
@@ -22,6 +23,7 @@ dependencies {
 }
 
 apply from: "$rootDir/gradle/codeQuality.gradle"
+apply from: "$rootDir/gradle/buildScans.gradle"
 
 test {
     useJUnitPlatform {
