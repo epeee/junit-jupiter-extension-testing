@@ -39,7 +39,43 @@ class SampleClasses {
     static class HasNoAbortedTests {
 
         @Test
-        void skippedTest() {
+        void failingTest() {
+            throw new IllegalStateException();
+        }
+    }
+
+    @Tag("sample")
+    static class HasFailedTests {
+
+        @Test
+        void failingTest() {
+            throw new IllegalStateException();
+        }
+    }
+
+    @Tag("sample")
+    static class HasNoFailedTests {
+
+        @Test
+        void successfulTest() {
+            Assertions.assertThat(true).isTrue();
+        }
+    }
+
+    @Tag("sample")
+    static class HasSuccessfulTests {
+
+        @Test
+        void successfulTest() {
+            Assertions.assertThat(true).isTrue();
+        }
+    }
+
+    @Tag("sample")
+    static class HasNoSuccessfulTests {
+
+        @Test
+        void failingTest() {
             throw new IllegalStateException();
         }
     }
