@@ -1,0 +1,7 @@
+if (JavaVersion.current() == JavaVersion.VERSION_1_8) {
+    apply plugin: "net.ltgt.errorprone"
+
+    dependencies {
+        errorprone 'com.google.errorprone:error_prone_core:2.3.1'
+    }
+}
