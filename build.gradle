@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id "com.gradle.build-scan" version "1.15.1"
+    id "net.ltgt.errorprone" version "0.0.14" apply false
 }
 
 group 'io.github.epeee'
@@ -24,6 +25,7 @@ dependencies {
 
 apply from: "$rootDir/gradle/codeQuality.gradle"
 apply from: "$rootDir/gradle/buildScans.gradle"
+apply from: "$rootDir/gradle/errorprone.gradle"
 
 test {
     useJUnitPlatform {
