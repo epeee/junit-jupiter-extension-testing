@@ -36,6 +36,6 @@ test {
 }
 
 wrapper {
-    gradleVersion = "4.8.1"
-    distributionSha256Sum = "af334d994b5e69e439ab55b5d2b7d086da5ea6763d78054f49f147b06370ed71"
+    gradleVersion = "4.9-rc-1"
+    distributionSha256Sum = "52e32ccfa4edc679e6bfad93e0f9fcd6358dc39dfb7bf8f2e1222b8d18ead359"
 }
