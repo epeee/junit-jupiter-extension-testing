@@ -46,6 +46,16 @@ class ExtensionTestingTest {
         void testHasAbortedTestNrHadDifferentNrOfAbortedTests() {
             assertThatThrownBy(() -> assertThatTest(SampleClasses.HasNoAbortedTests.class).hasAbortedTests(2)).hasMessageContaining("Expectation did not match");
         }
+
+        @Test
+        void testHasAbortedTestsInBeforeAll() {
+            assertThatTest(SampleClasses.AbortedInBeforeAll.class).hasAbortedTests(2);
+        }
+
+        @Test
+        void testHasAbortedTestsInBeforeEach() {
+            assertThatTest(SampleClasses.AbortedInBeforeEach.class).hasAbortedTests(2);
+        }
     }
 
     // Failed
@@ -80,6 +90,16 @@ class ExtensionTestingTest {
         @Test
         void testHasFailedTestNrHadDifferentNrOfFailedTests() {
             assertThatThrownBy(() -> assertThatTest(SampleClasses.HasNoFailedTests.class).hasFailedTests(2)).hasMessageContaining("Expectation did not match");
+        }
+
+        @Test
+        void testHasFailedTestsInBeforeAll() {
+            assertThatTest(SampleClasses.FailedInBeforeAll.class).hasAbortedTests(2);
+        }
+
+        @Test
+        void testHasFailedTestsInBeforeEach() {
+            assertThatTest(SampleClasses.FailedInBeforeEach.class).hasFailedTests(2);
         }
     }
 

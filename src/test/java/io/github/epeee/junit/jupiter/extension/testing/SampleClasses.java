@@ -2,6 +2,8 @@ package io.github.epeee.junit.jupiter.extension.testing;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -77,6 +79,82 @@ class SampleClasses {
         @Test
         void failingTest() {
             throw new IllegalStateException();
+        }
+    }
+
+    @Tag("sample")
+    static class AbortedInBeforeAll {
+
+        @BeforeAll
+        static void beforeAll() {
+            Assumptions.assumeTrue(false);
+        }
+
+        @Test
+        void test() {
+            Assertions.fail("failing...");
+        }
+
+        @Test
+        void anotherTest() {
+            Assertions.assertThat(true).isTrue();
+        }
+    }
+
+    @Tag("sample")
+    static class AbortedInBeforeEach {
+
+        @BeforeEach
+        void before() {
+            Assumptions.assumeTrue(false);
+        }
+
+        @Test
+        void test() {
+            Assertions.fail("failing...");
+        }
+
+        @Test
+        void anotherTest() {
+            Assertions.assertThat(true).isTrue();
+        }
+    }
+
+    @Tag("sample")
+    static class FailedInBeforeAll {
+
+        @BeforeAll
+        static void beforeAll() {
+            Assertions.assertThat(false).isTrue();
+        }
+
+        @Test
+        void test() {
+            Assertions.fail("failing...");
+        }
+
+        @Test
+        void anotherTest() {
+            Assertions.assertThat(true).isTrue();
+        }
+    }
+
+    @Tag("sample")
+    static class FailedInBeforeEach {
+
+        @BeforeEach
+        void before() {
+            Assertions.assertThat(false).isTrue();
+        }
+
+        @Test
+        void test() {
+            Assertions.fail("failing...");
+        }
+
+        @Test
+        void anotherTest() {
+            Assertions.assertThat(true).isTrue();
         }
     }
 }

@@ -51,6 +51,12 @@ class TestExecutionUtil {
             public void executionFinished(TestDescriptor testDescriptor, TestExecutionResult testExecutionResult) {
                 if (testDescriptor.isTest()) {
                     map.put(testDescriptor, testExecutionResult);
+                } else if (testDescriptor.getChildren().size() > 0) {
+                    testDescriptor.getChildren().forEach(testDescriptor1 -> {
+                        if (testDescriptor1.isTest()) {
+                            map.putIfAbsent(testDescriptor1, TestExecutionResult.aborted(null));
+                        }
+                    });
                 }
             }
 
