@@ -1,14 +1,17 @@
 package io.github.epeee.junit.jupiter.extension.testing;
 
-import org.junit.jupiter.api.Assertions;
+import org.assertj.core.api.Condition;
 import org.junit.platform.engine.TestDescriptor;
 import org.junit.platform.engine.TestExecutionResult;
 
+import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestResultAssert {
 
@@ -19,50 +22,48 @@ public class TestResultAssert {
     }
 
     public TestResultAssert hasNoAbortedTests() {
-        return hasTests(filter(TestExecutionResult.Status.ABORTED), countEqualZero());
+        return hasTests(TestExecutionResult.Status.ABORTED, countEqualZero());
     }
 
     public TestResultAssert hasAbortedTests(int nr) {
-        return hasTests(filter(TestExecutionResult.Status.ABORTED), countEqual(nr));
+        return hasTests(TestExecutionResult.Status.ABORTED, countEqual(nr));
     }
 
     public TestResultAssert hasAbortedTests() {
-        return hasTests(filter(TestExecutionResult.Status.ABORTED), countGreaterZero());
+        return hasTests(TestExecutionResult.Status.ABORTED, countGreaterZero());
     }
 
     public TestResultAssert hasNoFailedTests() {
-        return hasTests(filter(TestExecutionResult.Status.FAILED), countEqualZero());
+        return hasTests(TestExecutionResult.Status.FAILED, countEqualZero());
     }
 
     public TestResultAssert hasFailedTests(int nr) {
-        return hasTests(filter(TestExecutionResult.Status.FAILED), countEqual(nr));
+        return hasTests(TestExecutionResult.Status.FAILED, countEqual(nr));
     }
 
     public TestResultAssert hasFailedTests() {
-        return hasTests(filter(TestExecutionResult.Status.FAILED), countGreaterZero());
+        return hasTests(TestExecutionResult.Status.FAILED, countGreaterZero());
     }
 
     public TestResultAssert hasNoSuccessfulTests() {
-        return hasTests(filter(TestExecutionResult.Status.SUCCESSFUL), countEqualZero());
+        return hasTests(TestExecutionResult.Status.SUCCESSFUL, countEqualZero());
     }
 
     public TestResultAssert hasSuccessfulTests(int nr) {
-        return hasTests(filter(TestExecutionResult.Status.SUCCESSFUL), countEqual(nr));
+        return hasTests(TestExecutionResult.Status.SUCCESSFUL, countEqual(nr));
     }
 
     public TestResultAssert hasSuccessfulTests() {
-        return hasTests(filter(TestExecutionResult.Status.SUCCESSFUL), countGreaterZero());
+        return hasTests(TestExecutionResult.Status.SUCCESSFUL, countGreaterZero());
     }
 
-    public TestResultAssert hasTests(Predicate<TestExecutionResult> filter, Predicate<Stream<TestExecutionResult>> condition) {
+    public TestResultAssert hasTests(TestExecutionResult.Status status, BiConsumer<Stream<TestExecutionResult>, TestExecutionResult.Status> condition) {
+        Predicate<TestExecutionResult> filter = filter(status);
+
         BiFunction<Stream<TestExecutionResult>, Predicate<TestExecutionResult>, Stream<TestExecutionResult>> function = (stream, testExecutionResultPredicate) -> stream.filter(testExecutionResultPredicate);
         Stream<TestExecutionResult> result = function.apply(map.values().stream(), filter);
 
-        BiConsumer<Stream<TestExecutionResult>, Predicate<Stream<TestExecutionResult>>> consumer = (stream, predicate) -> {
-            if (!predicate.test(stream)) {
-                Assertions.fail("Expectation did not match for " + map);
-            }
-        };
+        BiConsumer<Stream<TestExecutionResult>, BiConsumer<Stream<TestExecutionResult>, TestExecutionResult.Status>> consumer = (stream, consumer1) -> consumer1.accept(stream, status);
 
         consumer.accept(result, condition);
         return this;
@@ -72,19 +73,23 @@ public class TestResultAssert {
         return result -> result.getStatus() == status;
     }
 
-    private <T> Predicate<Stream<T>> countEqual(int nr) {
-        return stream -> stream.count() == nr;
+    private <T> BiConsumer<Stream<T>, TestExecutionResult.Status> countEqual(int nr) {
+        return (stream, status) -> assertThat(stream).as(getDescription(status)).hasSize(nr);
     }
 
-    private <T> Predicate<Stream<T>> countEqualZero() {
+    private <T> BiConsumer<Stream<T>, TestExecutionResult.Status> countEqualZero() {
         return countEqual(0);
     }
 
-    private <T> Predicate<Stream<T>> countGreater(int nr) {
-        return stream -> stream.count() > nr;
+    private <T> BiConsumer<Stream<T>, TestExecutionResult.Status> countGreater(int nr) {
+        return (stream, status) -> assertThat(stream).as(getDescription(status)).has(new Condition<>((Predicate<List<? extends T>>) ts -> ts.size() > 0, "count greater " + nr));
     }
 
-    private <T> Predicate<Stream<T>> countGreaterZero() {
+    private <T> BiConsumer<Stream<T>, TestExecutionResult.Status> countGreaterZero() {
         return countGreater(0);
+    }
+
+    private <T> String getDescription(T t) {
+        return "Number of '" + t + "' tests did not match:";
     }
 }

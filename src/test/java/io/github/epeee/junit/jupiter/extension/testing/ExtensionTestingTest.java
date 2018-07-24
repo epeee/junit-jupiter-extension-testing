@@ -24,7 +24,7 @@ class ExtensionTestingTest {
 
         @Test
         void testHasNoAbortedTestsHadAbortedTests() {
-            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasNoAbortedTests.class).hasAbortedTests()).hasMessageContaining("Expectation did not match");
+            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasNoAbortedTests.class).hasAbortedTests()).hasMessageContaining("Number of 'ABORTED' tests did not match");
         }
 
         @Test
@@ -34,7 +34,7 @@ class ExtensionTestingTest {
 
         @Test
         void testHasAbortedTestHadNoAbortedTest() {
-            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasAbortedTests.class).hasNoAbortedTests()).hasMessageContaining("Expectation did not match");
+            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasAbortedTests.class).hasNoAbortedTests()).hasMessageContaining("Number of 'ABORTED' tests did not match");
         }
 
         @Test
@@ -44,7 +44,7 @@ class ExtensionTestingTest {
 
         @Test
         void testHasAbortedTestNrHadDifferentNrOfAbortedTests() {
-            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasNoAbortedTests.class).hasAbortedTests(2)).hasMessageContaining("Expectation did not match");
+            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasNoAbortedTests.class).hasAbortedTests(2)).hasMessageContaining("Number of 'ABORTED' tests did not match");
         }
 
         @Test
@@ -69,7 +69,7 @@ class ExtensionTestingTest {
 
         @Test
         void testHasNoFailedTestsHadFailedTests() {
-            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasNoFailedTests.class).hasFailedTests()).hasMessageContaining("Expectation did not match");
+            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasNoFailedTests.class).hasFailedTests()).hasMessageContaining("Number of 'FAILED' tests did not match");
         }
 
         @Test
@@ -79,7 +79,7 @@ class ExtensionTestingTest {
 
         @Test
         void testHasFailedTestHadNoFailedTest() {
-            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasFailedTests.class).hasNoFailedTests()).hasMessageContaining("Expectation did not match");
+            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasFailedTests.class).hasNoFailedTests()).hasMessageContaining("Number of 'FAILED' tests did not match");
         }
 
         @Test
@@ -89,7 +89,7 @@ class ExtensionTestingTest {
 
         @Test
         void testHasFailedTestNrHadDifferentNrOfFailedTests() {
-            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasNoFailedTests.class).hasFailedTests(2)).hasMessageContaining("Expectation did not match");
+            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasNoFailedTests.class).hasFailedTests(2)).hasMessageContaining("Number of 'FAILED' tests did not match");
         }
 
         @Test
@@ -114,7 +114,7 @@ class ExtensionTestingTest {
 
         @Test
         void testHasNoSuccessfulTestsHadSuccessfulTests() {
-            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasNoSuccessfulTests.class).hasSuccessfulTests()).hasMessageContaining("Expectation did not match");
+            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasNoSuccessfulTests.class).hasSuccessfulTests()).hasMessageContaining("Number of 'SUCCESSFUL' tests did not match");
         }
 
         @Test
@@ -124,7 +124,7 @@ class ExtensionTestingTest {
 
         @Test
         void testHasSuccessfulTestHadNoSuccessfulTest() {
-            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasSuccessfulTests.class).hasNoSuccessfulTests()).hasMessageContaining("Expectation did not match");
+            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasSuccessfulTests.class).hasNoSuccessfulTests()).hasMessageContaining("Number of 'SUCCESSFUL' tests did not match");
         }
 
         @Test
@@ -134,7 +134,7 @@ class ExtensionTestingTest {
 
         @Test
         void testHasSuccessfulTestNrHadDifferentNrOfSuccessfulTests() {
-            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasNoSuccessfulTests.class).hasSuccessfulTests(2)).hasMessageContaining("Expectation did not match");
+            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasNoSuccessfulTests.class).hasSuccessfulTests(2)).hasMessageContaining("Number of 'SUCCESSFUL' tests did not match");
         }
     }
 }
