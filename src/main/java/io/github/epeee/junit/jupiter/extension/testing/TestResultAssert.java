@@ -1,5 +1,6 @@
 package io.github.epeee.junit.jupiter.extension.testing;
 
+import com.google.errorprone.annotations.CheckReturnValue;
 import org.assertj.core.api.Condition;
 import org.junit.platform.engine.TestDescriptor;
 import org.junit.platform.engine.TestExecutionResult;
@@ -9,6 +10,7 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -55,6 +57,13 @@ public class TestResultAssert {
 
     public TestResultAssert hasSuccessfulTests() {
         return hasTests(TestExecutionResult.Status.SUCCESSFUL, countGreaterZero());
+    }
+
+    @CheckReturnValue
+    public TestResultAssert filtering(Predicate<TestDescriptor> predicate) {
+        return new TestResultAssert(map.entrySet().stream().filter(a ->
+                predicate.test(a.getKey())
+        ).collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue())));
     }
 
     public TestResultAssert hasTests(TestExecutionResult.Status status, BiConsumer<Stream<TestExecutionResult>, TestExecutionResult.Status> condition) {

@@ -13,6 +13,13 @@ class ExtensionTestingTest {
         assertThatTest(SampleClasses.MyJupiterTest.class).hasSuccessfulTests(1).hasFailedTests(1).hasAbortedTests(1);
     }
 
+    @Test
+    void testFiltering() {
+        assertThatTest(AbortedTests.class).filtering(
+                p -> p.getDisplayName().equalsIgnoreCase("testHasNoAbortedTestsHadNoAbortedTests()")
+        ).hasSuccessfulTests(1).hasAbortedTests(0).hasFailedTests(0);
+    }
+
     // Aborted Tests
     @Nested
     class AbortedTests {
