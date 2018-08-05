@@ -4,13 +4,19 @@
 language: java
 
 matrix:
+  allow_failures:
+   - oraclejdk-ea
+
+jdk:
+ - oraclejdk8
+ - oraclejdk9
+ - oraclejdk10
+ - oraclejdk11
+jobs:
   include:
-    - jdk: oraclejdk8
-#     - jdk: oraclejdk9
-#     - jdk: oraclejdk10
-#     - jdk: oraclejdk-ea
-#   allow_failures:
-#     - jdk: oraclejdk-ea
+  - stage: deploy
+    jdk: oraclejdk8
+    script: ./gradlew ciPerformRelease
 
 #don't build tags
 branches:
@@ -22,5 +28,5 @@ install:
  - true
 
 script:
-  - ./gradlew --version
-  - ./gradlew build && ./gradlew ciPerformRelease
+ - ./gradlew --version
+ - ./gradlew build
