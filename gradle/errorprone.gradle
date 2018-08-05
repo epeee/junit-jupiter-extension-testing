@@ -10,7 +10,7 @@ if (JavaVersion.current() == JavaVersion.VERSION_1_8) {
 
     errorproneDependency()
 
-} else if (JavaVersion.current() > JavaVersion.VERSION_1_8) {
+} else if (JavaVersion.current() > JavaVersion.VERSION_1_8 && !JavaVersion.current().java11Compatible) {
     apply plugin: "net.ltgt.errorprone-javacplugin"
 
     errorproneDependency()
