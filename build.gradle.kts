@@ -39,7 +39,7 @@ val test by tasks.getting(Test::class) {
     }
 }
 
-val wrapper by tasks.getting(Wrapper::class) {
-    gradleVersion = "4.9"
-    distributionSha256Sum = "e66e69dce8173dd2004b39ba93586a184628bc6c28461bc771d6835f7f9b0d28"
+tasks.getByName<Wrapper>("wrapper") {
+    gradleVersion = "4.10-rc-2"
+    distributionSha256Sum = "e90d3c32910e259814bcca82b3911172ecca1ff1ab5ed69b4de3c1df8b378b40"
 }
