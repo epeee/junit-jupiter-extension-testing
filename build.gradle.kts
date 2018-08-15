@@ -1,6 +1,6 @@
 plugins {
     java
-    id("com.gradle.build-scan") version "1.15.1"
+    id("com.gradle.build-scan") version "1.15.2"
     id("org.shipkit.java") version "2.0.29"
     id("net.ltgt.errorprone") version "0.0.16" apply false
     id("net.ltgt.errorprone-javacplugin") version "0.3" apply false
