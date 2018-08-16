@@ -91,6 +91,7 @@ class SampleClasses {
         }
 
         @Test
+        @SuppressWarnings("CheckReturnValue")
         void test() {
             Assertions.fail("failing...");
         }
@@ -110,6 +111,7 @@ class SampleClasses {
         }
 
         @Test
+        @SuppressWarnings("CheckReturnValue")
         void test() {
             Assertions.fail("failing...");
         }
@@ -129,6 +131,7 @@ class SampleClasses {
         }
 
         @Test
+        @SuppressWarnings("CheckReturnValue")
         void test() {
             Assertions.fail("failing...");
         }
@@ -148,6 +151,7 @@ class SampleClasses {
         }
 
         @Test
+        @SuppressWarnings("CheckReturnValue")
         void test() {
             Assertions.fail("failing...");
         }
