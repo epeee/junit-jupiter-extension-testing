@@ -40,6 +40,6 @@ val test by tasks.getting(Test::class) {
 }
 
 tasks.getByName<Wrapper>("wrapper") {
-    gradleVersion = "4.10-rc-2"
-    distributionSha256Sum = "e90d3c32910e259814bcca82b3911172ecca1ff1ab5ed69b4de3c1df8b378b40"
+    gradleVersion = "4.10-rc-3"
+    distributionSha256Sum = "4e5f3a2e0c4f1f0313211253d799dd66570afdf0ebb3d785ee97a97d942c632d"
 }
