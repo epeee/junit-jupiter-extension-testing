@@ -5,13 +5,14 @@ language: java
 
 matrix:
   allow_failures:
-   - oraclejdk-ea
+   - openjdk-ea
 
 jdk:
  - oraclejdk8
  - oraclejdk9
  - oraclejdk10
  - oraclejdk11
+ - openjdk-ea
 jobs:
   include:
   - stage: deploy
