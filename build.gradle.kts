@@ -20,7 +20,7 @@ val junitJupiter:String by project
 
 dependencies {
     implementation("org.junit.jupiter:junit-jupiter-api:$junitJupiter")
-    implementation("org.junit.platform:junit-platform-launcher:1.2.0")
+    implementation("org.junit.platform:junit-platform-launcher:1.3.0")
     implementation("org.junit.jupiter:junit-jupiter-engine:$junitJupiter")
     implementation("com.google.errorprone:error_prone_annotations:2.3.1")
     implementation("org.assertj:assertj-core:3.11.1")
