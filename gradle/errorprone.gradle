@@ -1,17 +1,17 @@
 
 def errorproneDependency =  {
+    if (JavaVersion.current() == JavaVersion.VERSION_1_8) {
+        dependencies {
+            errorproneJavac("com.google.errorprone:javac:9+181-r4173-1")
+        }
+    }
+
     dependencies {
         errorprone 'com.google.errorprone:error_prone_core:2.3.1'
     }
 }
 
-if (JavaVersion.current() == JavaVersion.VERSION_1_8) {
+if (!JavaVersion.current().java11Compatible) {
     apply plugin: "net.ltgt.errorprone"
-
-    errorproneDependency()
-
-} else if (JavaVersion.current() > JavaVersion.VERSION_1_8 && !JavaVersion.current().java11Compatible) {
-    apply plugin: "net.ltgt.errorprone-javacplugin"
-
     errorproneDependency()
 }
