@@ -32,8 +32,6 @@ apply {
     from("$rootDir/gradle/errorprone.gradle")
 }
 
-tasks.registering
-
 val test by tasks.getting(Test::class) {
     useJUnitPlatform {
         excludeTags("sample")
