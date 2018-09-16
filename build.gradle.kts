@@ -32,7 +32,6 @@ apply {
     from("$rootDir/gradle/errorprone.gradle")
 }
 
-
 val test by tasks.getting(Test::class) {
     useJUnitPlatform {
         excludeTags("sample")
@@ -40,6 +39,6 @@ val test by tasks.getting(Test::class) {
 }
 
 tasks.getByName<Wrapper>("wrapper") {
-    gradleVersion = "4.10"
-    distributionSha256Sum = "248cfd92104ce12c5431ddb8309cf713fe58de8e330c63176543320022f59f18"
+    gradleVersion = "4.10.1"
+    distributionSha256Sum = "e53ce3a01cf016b5d294eef20977ad4e3c13e761ac1e475f1ffad4c6141a92bd"
 }
