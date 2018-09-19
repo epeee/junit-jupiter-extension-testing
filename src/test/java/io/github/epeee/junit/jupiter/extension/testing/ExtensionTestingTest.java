@@ -144,4 +144,38 @@ class ExtensionTestingTest {
             assertThatThrownBy(() -> assertThatTest(SampleClasses.HasNoSuccessfulTests.class).hasSuccessfulTests(2)).hasMessageContaining("Number of 'SUCCESSFUL' tests did not match");
         }
     }
+
+    @Nested
+    class HasCauseTests {
+
+        @Test
+        void testHasCause() {
+            assertThatTest(SampleClasses.HasNoSuccessfulTests.class).hasCause(IllegalStateException.class);
+        }
+
+        @Test
+        void testHasCauseHasMessageContaining() {
+            assertThatTest(SampleClasses.HasNoSuccessfulTests.class).hasCause(IllegalStateException.class).hasMessageContaining("some illegal state");
+        }
+
+        @Test
+        void testHasCauseOnMultipleResultsButJustOneFailing() {
+            assertThatTest(SampleClasses.MyJupiterTest.class).hasCause(IllegalStateException.class);
+        }
+
+        @Test
+        void testHasCauseOnMultipleFailingResults() {
+            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasMultipleFailedTests.class).hasCause(IllegalStateException.class)).hasMessageContaining("Number of 'FAILED' tests did not match");
+        }
+
+        @Test
+        void testHasCauseOnMultipleResults() {
+            assertThatTest(SampleClasses.MyJupiterTest.class).hasCause(IllegalStateException.class);
+        }
+
+        @Test
+        void testHasWrongCause() {
+            assertThatThrownBy(() -> assertThatTest(SampleClasses.HasNoSuccessfulTests.class).hasCause(IllegalArgumentException.class)).isInstanceOf(AssertionError.class);
+        }
+    }
 }

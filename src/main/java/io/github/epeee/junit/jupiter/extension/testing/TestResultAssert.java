@@ -1,6 +1,8 @@
 package io.github.epeee.junit.jupiter.extension.testing;
 
 import com.google.errorprone.annotations.CheckReturnValue;
+import org.assertj.core.api.AbstractThrowableAssert;
+import org.assertj.core.api.Assertions;
 import org.assertj.core.api.Condition;
 import org.junit.platform.engine.TestDescriptor;
 import org.junit.platform.engine.TestExecutionResult;
@@ -127,6 +129,11 @@ public class TestResultAssert {
         return new TestResultAssert(map.entrySet().stream().filter(a ->
                 predicate.test(a.getKey())
         ).collect(Collectors.toMap(e -> e.getKey(), e -> e.getValue())));
+    }
+
+    public AbstractThrowableAssert<?, ? extends Throwable> hasCause(Class<? extends Throwable> cause) {
+        hasFailedTests(1);
+        return Assertions.assertThat(map.entrySet().iterator().next().getValue().getThrowable().get()).isInstanceOf(cause);
     }
 
     /**

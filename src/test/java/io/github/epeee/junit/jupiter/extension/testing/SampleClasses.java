@@ -78,7 +78,7 @@ class SampleClasses {
 
         @Test
         void failingTest() {
-            throw new IllegalStateException();
+            throw new IllegalStateException("some illegal state");
         }
     }
 
@@ -155,6 +155,20 @@ class SampleClasses {
         @Test
         void anotherTest() {
             Assertions.assertThat(true).isTrue();
+        }
+    }
+
+    @Tag("sample")
+    static class HasMultipleFailedTests {
+
+        @Test
+        void failingTest() {
+            throw new IllegalStateException("some illegal state");
+        }
+
+        @Test
+        void anotherFailingTest() {
+            throw new IllegalArgumentException("some illegal argument");
         }
     }
 }
