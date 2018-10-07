@@ -28,7 +28,7 @@ dependencies {
 apply {
     from("$rootDir/gradle/codeQuality.gradle.kts")
     from("$rootDir/gradle/buildScans.gradle")
-    from("$rootDir/gradle/errorprone.gradle")
+    from("$rootDir/gradle/errorprone.gradle.kts")
 }
 
 val test by tasks.getting(Test::class) {
