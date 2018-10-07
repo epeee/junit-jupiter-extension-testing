@@ -26,7 +26,7 @@ dependencies {
 }
 
 apply {
-    from("$rootDir/gradle/codeQuality.gradle")
+    from("$rootDir/gradle/codeQuality.gradle.kts")
     from("$rootDir/gradle/buildScans.gradle")
     from("$rootDir/gradle/errorprone.gradle")
 }
