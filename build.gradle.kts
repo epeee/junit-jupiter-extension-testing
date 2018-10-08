@@ -5,6 +5,12 @@ plugins {
     id("net.ltgt.errorprone") version "0.6" apply false
 }
 
+buildScan {
+    publishAlwaysIf(System.getenv("CI") != null)
+    setTermsOfServiceUrl("https://gradle.com/terms-of-service")
+    setTermsOfServiceAgree("yes")
+}
+
 group = "io.github.epeee"
 
 java {
@@ -27,11 +33,10 @@ dependencies {
 
 apply {
     from("$rootDir/gradle/codeQuality.gradle.kts")
-    from("$rootDir/gradle/buildScans.gradle")
     from("$rootDir/gradle/errorprone.gradle.kts")
 }
 
-val test by tasks.getting(Test::class) {
+tasks.named<Test>("test") {
     useJUnitPlatform {
         excludeTags("sample")
     }
