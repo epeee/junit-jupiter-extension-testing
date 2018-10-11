@@ -9,11 +9,9 @@ fun errorproneDependency() {
 
     val errorprone by configurations
     dependencies {
-        errorprone("com.google.errorprone:error_prone_core:2.3.1")
+        errorprone("com.google.errorprone:error_prone_core:2.3.2")
     }
 }
 
-if (!JavaVersion.current().isJava11Compatible) {
-    apply(plugin = "net.ltgt.errorprone")
-    errorproneDependency()
-}
+apply(plugin = "net.ltgt.errorprone")
+errorproneDependency()
